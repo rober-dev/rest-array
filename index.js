@@ -2,6 +2,17 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+// MongoDB connection
+const mongo_connection = 'mongodb://127.0.0.1/pelis-maria';
+mongoose.connect(mongo_connection, { useNewUrlParser: true });
+mongoose.connection.on('error', err => {
+  console.log(error);
+});
+mongoose.connection.on('open', () => {
+  console.log(`Express connected to ${mongo_connection}`);
+});
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
